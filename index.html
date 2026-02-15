@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Universe 💖</title>
+
+<style>
+.tulip {
+    width: 150px;
+    max-width: 60%;
+    margin: 20px auto;
+    display: block;
+    opacity: 0;
+    animation: fadeIn 2s ease forwards, glowPulse 3s infinite alternate;
+    filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.6));
+}
+
+#game {
+    transition: opacity 1s ease;
+}
+
+#finalMessage {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes glowPulse {
+    from {
+        filter: drop-shadow(0 0 8px rgba(255, 105, 180, 0.5));
+    }
+    to {
+        filter: drop-shadow(0 0 18px rgba(255, 105, 180, 0.9));
+    }
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffd6e7, #fff0f6);
+    overflow-x: hidden;
+}
+
+.section {
+    padding: 40px 20px;
+}
+
+h1 {
+    color: #ff4d88;
+}
+
+button {
+    padding: 18px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: #ff6fa5;
+    color: white;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.memory-card {
+    background: white;
+    padding: 20px;
+    margin: 15px auto;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.heart {
+    position: absolute;
+    font-size: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Password Screen -->
+<div id="passwordScreen" class="section">
+    <h1>Only you can enter 💕</h1>
+<img src="tulip.png" class="tulip">
+    <p>Name one of your favorite flowers</p>
+    <input type="password" id="passwordInput" placeholder="Secret word">
+    <br><br>
+    <button onclick="checkPassword()">Enter 💌</button>
+    <p id="errorMessage" style="color:red;"></p>
+</div>
+
+<!-- Landing -->
+<div id="landing" class="section hidden">
+    <h1>This is a surprise for someone special 💕</h1>
+    <button onclick="showMemories()">Tap if you're my favorite person</button>
+</div>
+
+<!-- Memories -->
+<div id="memories" class="section hidden">
+    <h1>Our Little Memories for Joud and Omar🌸</h1>
+
+    <div class="memory-card">
+        <h3>جود القمرة</h3>
+        <p>انتي شمسي و قمري.</p>
+    </div>
+
+    <div class="memory-card">
+        <h3>💖بعزك💖</h3>
+        <p>لانك انتي جود</p>
+    </div>
+
+    <button onclick="startGame()">Play a Tiny Game 💘</button>
+</div>
+
+<!-- Game -->
+<div id="game" class="section hidden">
+    <h1>Catch 5 Hearts 💗</h1>
+    <p>Score: <span id="score">0</span></p>
+</div>
+
+<!-- Final Message -->
+<div id="finalMessage" class="section hidden">
+    <h1>انتي حياتي 💌</h1>
+    <p>No matter the distance, I will always be close.</p>
+</div>
+
+<script>
+
+function checkPassword() {
+    const correctPassword = "tulip";  // 
+    const userInput = document.getElementById("passwordInput").value;
+
+    if(userInput === correctPassword){
+        document.getElementById("passwordScreen").classList.add("hidden");
+        document.getElementById("landing").classList.remove("hidden");
+    } else {
+        document.getElementById("errorMessage").innerText = "That's not our word 👀";
+    }
+}
+
+let score = 0;
+let heartInterval;
+
+function checkPassword() {
+    const correctPassword = "tulip";  
+    const userInput = document.getElementById("passwordInput").value;
+
+    if(userInput === correctPassword){
+        document.getElementById("passwordScreen").classList.add("hidden");
+        document.getElementById("landing").classList.remove("hidden");
+    } else {
+        document.getElementById("errorMessage").innerText = "That's not our word 👀";
+    }
+}
+
+function showMemories() {
+    document.getElementById("landing").classList.add("hidden");
+    document.getElementById("memories").classList.remove("hidden");
+}
+
+function startGame() {
+    document.getElementById("memories").classList.add("hidden");
+    document.getElementById("game").classList.remove("hidden");
+    heartInterval = setInterval(createHeart, 1200);
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerText = "💖";
+    heart.classList.add("heart");
+
+    heart.style.left = Math.random() * (window.innerWidth - 40) + "px";
+    heart.style.top = "0px";
+
+    document.body.appendChild(heart);
+
+    let fall = setInterval(() => {
+        heart.style.top = heart.offsetTop + 4 + "px";
+
+        heart.onclick = function() {
+            score++;
+            document.getElementById("score").innerText = score;
+            heart.remove();
+            
+            if(score === 5){
+                clearInterval(heartInterval);
+
+                // fade out game
+                document.getElementById("game").style.opacity = "0";
+
+                setTimeout(() => {
+                    document.getElementById("game").classList.add("hidden");
+                    document.getElementById("finalMessage").classList.remove("hidden");
+                    document.getElementById("finalMessage").style.opacity = "1";
+                    startFloatingHearts();
+                }, 1000);
+            }
+        }
+
+        if (heart.offsetTop > window.innerHeight) {
+            heart.remove();
+            clearInterval(fall);
+        }
+    }, 20);
+}
+
+function startFloatingHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.innerText = "💗";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "-30px";
+        heart.style.fontSize = "24px";
+        heart.style.opacity = "0.7";
+        heart.style.pointerEvents = "none";
+
+        document.body.appendChild(heart);
+
+        let rise = setInterval(() => {
+            let currentBottom = parseFloat(heart.style.bottom);
+            heart.style.bottom = (currentBottom + 3) + "px";
+
+            heart.style.opacity = parseFloat(heart.style.opacity) - 0.01;
+
+            if (parseFloat(heart.style.opacity) <= 0) {
+                heart.remove();
+                clearInterval(rise);
+            }
+        }, 30);
+    }, 500);
+}
+
+</script>
+
+</body>
+</html>
