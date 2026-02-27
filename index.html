@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Little Universe 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
 
 <style>
 .tulip {
@@ -37,31 +39,56 @@
     to {
         filter: drop-shadow(0 0 18px rgba(255, 105, 180, 0.9));
     }
-}
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}    
+    
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
-    background: linear-gradient(to bottom, #ffd6e7, #fff0f6);
+    background: linear-gradient(-45deg, #ffd6e7, #fff0f6, #ffe3f1, #ffd1ec);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
     overflow-x: hidden;
 }
 
 .section {
     padding: 40px 20px;
+    margin: 30px auto;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+    
 }
 
 h1 {
+    font-family: 'Playfair Display', serif;
     color: #ff4d88;
+    font-size: 28px;
+    margin-bottom: 15px;
 }
 
 button {
-    padding: 18px 30px;
-    font-size: 18px;
+    padding: 15px 28px;
+    font-size: 16px;
     border: none;
     border-radius: 30px;
-    background-color: #ff6fa5;
+    background: linear-gradient(135deg, #ff6fa5, #ff4d88);
     color: white;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 77, 136, 0.4);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 77, 136, 0.6);
 }
 
 .hidden {
@@ -69,15 +96,19 @@ button {
 }
 
 .memory-card {
-    background: white;
+    background: rgba(255,255,255,0.9);
     padding: 20px;
-    margin: 15px auto;
+    margin: 20px auto;
     border-radius: 20px;
     width: 90%;
     max-width: 400px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
 }
 
+.memory-card:hover {
+    transform: translateY(-5px);
+}
 .heart {
     position: absolute;
     font-size: 40px;
@@ -273,5 +304,6 @@ function startCountdown() {
 
 </body>
 </html>
+
 
 
