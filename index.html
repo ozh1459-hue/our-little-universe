@@ -52,25 +52,20 @@ body {
     background-size: 400% 400%;
     animation: gradientMove 12s ease infinite;
     overflow-x: hidden;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
 }
 
 
 .section {
     padding: 40px 20px;
-    margin: 40px 15px;
-    width: 100%;
+    margin: 40px auto;   /* THIS centers it */
+    width: 90%;
     max-width: 500px;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(12px);
     border-radius: 25px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
-
+    
 h1 {
     font-family: 'Playfair Display', serif;
     color: #ff4d88;
@@ -308,6 +303,7 @@ function startCountdown() {
 
 </body>
 </html>
+
 
 
 
