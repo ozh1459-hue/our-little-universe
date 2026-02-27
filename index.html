@@ -48,23 +48,27 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    text-align: center;
     background: linear-gradient(-45deg, #ffd6e7, #fff0f6, #ffe3f1, #ffd1ec);
     background-size: 400% 400%;
     animation: gradientMove 12s ease infinite;
     overflow-x: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
+
 
 .section {
     padding: 40px 20px;
-    margin: 30px auto;
+    margin: 40px 15px;
+    width: 100%;
     max-width: 500px;
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(12px);
     border-radius: 25px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-}
-    
 }
 
 h1 {
@@ -304,6 +308,7 @@ function startCountdown() {
 
 </body>
 </html>
+
 
 
 
